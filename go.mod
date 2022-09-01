@@ -1,4 +1,5 @@
-module awesomeProject
+module github.com/vatsal278/redisPOC
+
 
 go 1.18
 
