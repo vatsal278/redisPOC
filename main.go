@@ -7,46 +7,16 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/vatsal278/redisPOC/wrapper"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"time"
 )
 
 type Post struct {
 	ID    string `json:"id"`
 	Title string `json:"title"`
 }
-type opt struct {
-	Addr string
-	// Use the specified Username to authenticate the current connection
-	// with one of the connections defined in the ACL list when connecting
-	// to a Redis 6.0 instance, or greater, that is using the Redis ACL system.
-	Username string
-	// Optional password. Must match the password specified in the
-	// requirepass server configuration option (if connecting to a Redis 5.0 instance, or lower),
-	// or the User Password when connecting to a Redis 6.0 instance, or greater,
-	// that is using the Redis ACL system.
-	Password string
-	// Database to be selected after connecting to the server.
-	DB int
-	// Maximum number of retries before giving up.
-	// Default is 3 retries; -1 (not 0) disables retries.
-	MaxRetries int
-	// Dial timeout for establishing new connections.
-	// Default is 5 seconds.
-	DialTimeout time.Duration
-	// Maximum number of socket connections.
-	// Default is 10 connections per every available CPU as reported by runtime.GOMAXPROCS.
-	PoolSize int
-	// Minimum number of idle connections which is useful when establishing
-	// new connection is slow.
-	MinIdleConns int
-	// Connection age at which client retires (closes) the connection.
-	// Default is to not close aged connections.
-}
-
-//client args as
 
 func main() {
 	var db *sql.DB
@@ -77,43 +47,49 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+	sdk := wrapper.RedisSdkI(wrapper.Config{
+		Addr:     "localhost:9096",
+		Password: "",
+		DB:       0,
+	})
 	r := gin.Default()
 	r.GET("/pong/:id", func(c *gin.Context) {
 		var post Post
 		x := c.Param("id")
 
-		data, err := redisGet(x)
-		if err != nil {
-			if err != redis.Nil {
-				log.Print(err)
-				return
-			}
-			result, err := db.Query("SELECT id, title FROM posts WHERE id = ?", x)
-			if err != nil {
-				log.Print(err.Error())
-			}
-			defer result.Close()
-			for result.Next() {
-				err := result.Scan(&post.ID, &post.Title)
-				if err != nil {
-					log.Print(err.Error())
-				}
-			}
-			x, err := json.Marshal(post)
-			err = redisSet(post.ID, x)
+		data, err := sdk.RedisGet(x)
+		if err != nil && err != redis.Nil {
+			log.Print(err)
+			return
+		}
+		if err == nil {
+			err = json.Unmarshal(data, &post)
 			if err != nil {
 				log.Print(err)
 			}
+			log.Print("cached data")
 			json.NewEncoder(c.Writer).Encode(post)
 			return
-			log.Print()
 		}
-		err = json.Unmarshal(data, &post)
+		result, err := db.Query("SELECT id, title FROM posts WHERE id = ?", x)
 		if err != nil {
 			log.Print(err)
 		}
-		log.Print("cached data")
+		defer result.Close()
+		for result.Next() {
+			err := result.Scan(&post.ID, &post.Title)
+			if err != nil {
+				log.Print(err.Error())
+			}
+		}
+		y, err := json.Marshal(post)
+		err = sdk.RedisSet(post.ID, y)
+		if err != nil {
+			log.Print(err)
+		}
 		json.NewEncoder(c.Writer).Encode(post)
+		return
+		log.Print()
 
 	})
 	r.POST("/ping", func(c *gin.Context) {
