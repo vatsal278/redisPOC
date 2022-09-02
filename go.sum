@@ -69,6 +69,8 @@ github.com/ugorji/go/codec v1.2.7 h1:YPXUKf7fYbp/y8xloBqZOw2qaVggbfwMlI8WM3wZUJ0
 github.com/ugorji/go/codec v1.2.7/go.mod h1:WGN1fab3R1fzQlVQTkfxVtIBhWDRqOviHU95kRgeqEY=
 github.com/vatsal278/Redis-go-cache v0.0.0-20220902092758-7a3120a05ff7 h1:s5eiz4oiLELavZErhmTp5U79wfQNML/1ceKqqifksmI=
 github.com/vatsal278/Redis-go-cache v0.0.0-20220902092758-7a3120a05ff7/go.mod h1:gZ/FKg6hHe7bzLlRyIMoH94RnneAbRQX8l+7K76LD7A=
+github.com/vatsal278/redis v0.0.0-20220902101128-f09ba79b347f h1:dVRAkwsozEJhQ7BtWicJ2I3VgOzylwHTx6fevyKeVnI=
+github.com/vatsal278/redis v0.0.0-20220902101128-f09ba79b347f/go.mod h1:bBrQ5Q/9kOoys/7QgJAHbwNE3ZzWHJuya3Lrb2/8zxg=
 golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97/go.mod h1:GvvjBRRGRdwPK5ydBHafDWAxML/pGHZbMvKqRZ5+Abc=
 golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e h1:T8NU3HyQ8ClP4SEE+KbFlg6n0NhuTsN4MyznaarGsZM=
 golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e/go.mod h1:IxCIyHEi3zRg3s0A5j5BB6A9Jmi73HwBIUl50j+osU4=
