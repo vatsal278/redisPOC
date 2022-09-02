@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	_ "github.com/go-sql-driver/mysql"
-	wrapper "github.com/vatsal278/Redis-go-cache"
+	redisGo "github.com/vatsal278/go-redis-cache"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -33,7 +33,7 @@ func main() {
 	db_string := fmt.Sprintf("CREATE SCHEMA IF NOT EXISTS %s", dbName)
 	_, err = db.Exec(db_string)
 	if err != nil {
-		panic(err)
+		log.Print(err)
 	}
 	db.Close()
 	connection_string = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True", dbUser, dbPass, "localhost", "9095", dbName)
@@ -47,7 +47,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	sdk := wrapper.RedisSdkI(wrapper.Config{
+	sdk := redisGo.RedisSdkI(redisGo.Config{
 		Addr:     "localhost:9096",
 		Password: "",
 		DB:       0,
@@ -83,7 +83,7 @@ func main() {
 			}
 		}
 		y, err := json.Marshal(post)
-		err = sdk.RedisSet(post.ID, y)
+		err = sdk.RedisSet(post.ID, y, 5)
 		if err != nil {
 			log.Print(err)
 		}

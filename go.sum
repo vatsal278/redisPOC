@@ -67,10 +67,10 @@ github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/
 github.com/ugorji/go v1.2.7/go.mod h1:nF9osbDWLy6bDVv/Rtoh6QgnvNDpmCalQV5urGCCS6M=
 github.com/ugorji/go/codec v1.2.7 h1:YPXUKf7fYbp/y8xloBqZOw2qaVggbfwMlI8WM3wZUJ0=
 github.com/ugorji/go/codec v1.2.7/go.mod h1:WGN1fab3R1fzQlVQTkfxVtIBhWDRqOviHU95kRgeqEY=
-github.com/vatsal278/Redis-go-cache v0.0.0-20220902092758-7a3120a05ff7 h1:s5eiz4oiLELavZErhmTp5U79wfQNML/1ceKqqifksmI=
-github.com/vatsal278/Redis-go-cache v0.0.0-20220902092758-7a3120a05ff7/go.mod h1:gZ/FKg6hHe7bzLlRyIMoH94RnneAbRQX8l+7K76LD7A=
-github.com/vatsal278/redis v0.0.0-20220902101128-f09ba79b347f h1:dVRAkwsozEJhQ7BtWicJ2I3VgOzylwHTx6fevyKeVnI=
-github.com/vatsal278/redis v0.0.0-20220902101128-f09ba79b347f/go.mod h1:bBrQ5Q/9kOoys/7QgJAHbwNE3ZzWHJuya3Lrb2/8zxg=
+github.com/vatsal278/go-redis-cache v0.0.0-20220902112200-7bdff39cb808 h1:flcXm2tkaRSwY/gZsZs6Y2ruoTvv6429dgs/lXusyEc=
+github.com/vatsal278/go-redis-cache v0.0.0-20220902112200-7bdff39cb808/go.mod h1:MxBlorIbs192BQd9EBnl0FEaWc7vTC1Mu0KldMRTEuQ=
+github.com/vatsal278/redisGo v0.0.0-20220902105235-06963a4247f7 h1:zGu/UUye6T+hSvkLvSiOGcLjfn5tOxdcLPLpfAja+yU=
+github.com/vatsal278/redisGo v0.0.0-20220902105235-06963a4247f7/go.mod h1:OeSeD9Gt0OeRqPiwF6Po0MMZxNF8n1Nw2Veo60RrR3o=
 golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97/go.mod h1:GvvjBRRGRdwPK5ydBHafDWAxML/pGHZbMvKqRZ5+Abc=
 golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e h1:T8NU3HyQ8ClP4SEE+KbFlg6n0NhuTsN4MyznaarGsZM=
 golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e/go.mod h1:IxCIyHEi3zRg3s0A5j5BB6A9Jmi73HwBIUl50j+osU4=
